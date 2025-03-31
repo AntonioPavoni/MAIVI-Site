@@ -6,6 +6,7 @@
   <link rel="preload" href="/_next/static/media/a34f9d1faa5f3315-s.p.woff2" as="font" crossorigin="" type="font/woff2"/>
   <link rel="stylesheet" href="/_next/static/css/c059103e54287f73.css" data-precedence="next"/>
   <link rel="stylesheet" href="/dark-theme.css"/>
+  <link rel="stylesheet" href="/chatbot-interface.css"/>
   <link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-61cbad9178851632.js"/>
   <script src="/_next/static/chunks/ebe977ba-d647754c57af19fd.js" async=""></script>
   <script src="/_next/static/chunks/411-eae42c920592eb8e.js" async=""></script>
@@ -14,7 +15,7 @@
   <script src="/_next/static/chunks/app/page-f5c0804bad8e4c8b.js" async=""></script>
   <meta name="next-size-adjust" content=""/>
   <title>MAIVI - AI-Powered Architecture Design</title>
-  <meta name="description" content="Transform text to architectural designs with AI. Generate Python code for Rhino and Revit integration."/>
+  <meta name="description" content="MAIVI converts text to code for architectural design using AI, Rhino, and Revit integration."/>
   <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16"/>
   <script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script>
 </head>
@@ -28,7 +29,7 @@
               <a class="font-bold text-xl text-blue-600" href="/">MAIVI</a>
             </div>
             <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/">Home</a>
+              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm font-medium text-gray-900" href="/">Home</a>
               <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/features">Features</a>
               <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/workflow">Workflow</a>
               <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/about">About</a>
@@ -38,136 +39,76 @@
       </div>
     </header>
     <main class="flex-grow">
-      <div class="flex min-h-screen flex-col items-center justify-between p-6 md:p-24">
-        <div class="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
-          <div class="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-            <div class="flex place-items-center gap-2 p-8 lg:p-0">
-              <a class="font-bold text-xl" href="/">MAIVI</a>
-            </div>
-          </div>
-          <div class="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center lg:static lg:h-auto lg:w-auto lg:bg-none">
-            <nav class="flex gap-4">
-              <a class="hover:text-blue-600 transition-colors" href="/features">Features</a>
-              <a class="hover:text-blue-600 transition-colors" href="/workflow">Workflow</a>
-              <a class="hover:text-blue-600 transition-colors" href="/about">About</a>
-            </nav>
-          </div>
-        </div>
-        <div class="relative flex place-items-center my-16">
-          <h1 class="text-5xl font-bold text-center">MAI<span class="text-blue-600">VI</span></h1>
-        </div>
-        <div class="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
-          <div class="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-            <h2 class="mb-3 text-2xl font-semibold">Text to Code <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">→</span></h2>
-            <p class="m-0 max-w-[30ch] text-sm opacity-50">Convert natural language to Python code with our advanced AI.</p>
-          </div>
-          <div class="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-            <h2 class="mb-3 text-2xl font-semibold">Rhino Integration <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">→</span></h2>
-            <p class="m-0 max-w-[30ch] text-sm opacity-50">Generate architectural models in Rhino 8 via Grasshopper.</p>
-          </div>
-          <div class="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-            <h2 class="mb-3 text-2xl font-semibold">Revit Integration <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">→</span></h2>
-            <p class="m-0 max-w-[30ch] text-sm opacity-50">Convert models to BIM files for Revit seamlessly.</p>
-          </div>
-        </div>
-        <div class="mt-16 text-center">
-          <h2 class="text-3xl font-bold mb-6">Transform Your Architectural Workflow</h2>
-          <p class="max-w-2xl mx-auto">Our one-stop solution leverages AI to convert natural language into architectural designs. Simply describe what you want, and our system generates Python code that creates models in Rhino 8 through Grasshopper integration, then converts them to BIM files for Revit.</p>
-          <div class="mt-8">
-            <a class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" href="/workflow">See How It Works</a>
-          </div>
-        </div>
-        <div class="py-12">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Project Examples</h2>
-              <p class="mt-4 text-lg text-gray-500 max-w-3xl mx-auto">See how MAIVI transforms text descriptions into architectural models through Rhino and Revit.</p>
-            </div>
-            <div class="space-y-24">
-              <div class="bg-white overflow-hidden shadow rounded-lg project-card" data-project-id="1">
-                <div class="px-4 py-5 sm:p-6">
-                  <h3 class="text-2xl font-bold text-gray-900 mb-4">Parametric Tower Design</h3>
-                  <p class="text-gray-600 mb-6">A cylindrical tower with parametric floor heights and a conical roof, featuring evenly spaced windows around each floor.</p>
-                  <div class="bg-blue-50 p-4 rounded-md mb-8">
-                    <h4 class="font-medium text-blue-800 mb-2">Text Prompt:</h4>
-                    <p class="text-gray-700 italic">"Create a cylindrical tower with 5 floors, each floor having a height of 4 meters. Add a conical roof with a 30-degree slope. Place rectangular windows evenly spaced around each floor."</p>
-                  </div>
-                  <div class="mb-8">
-                    <h4 class="font-medium text-gray-800 mb-2">Generated Python Code:</h4>
-                    <div class="bg-gray-100 rounded-md overflow-hidden ">
-                      <div class="px-4 py-2 bg-gray-200 border-b border-gray-300 text-sm font-medium text-gray-700">python</div>
-                      <pre class="p-4 overflow-x-auto"><code class="text-sm font-mono">import rhinoscriptsyntax as rs
-import math
+      <div class="relative flex place-items-center my-16">
+        <h1 class="text-5xl font-bold text-center">MAI<span class="text-blue-600">VI</span></h1>
+      </div>
 
-# Create tower base
-radius = 10
-floor_height = 4
-num_floors = 5
+      <div class="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left mx-auto">
+        <a
+          href="/features#ai-text-to-code"
+          class="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+        >
+          <h2 class="mb-3 text-2xl font-semibold">
+            Text to Code{' '}
+            <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              →
+            </span>
+          </h2>
+          <p class="m-0 max-w-[30ch] text-sm opacity-50">
+            Convert natural language to Python code with our advanced AI.
+          </p>
+        </a>
 
-# Generate cylinder for each floor
-floor_cylinders = []
-for i in range(num_floors):
-    base_point = (0, 0, i * floor_height)
-    height_point = (0, 0, (i + 1) * floor_height)
-    cylinder = rs.AddCylinder(base_point, height_point, radius)
-    floor_cylinders.append(cylinder)
+        <a
+          href="/features#rhino-integration"
+          class="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+        >
+          <h2 class="mb-3 text-2xl font-semibold">
+            Rhino Integration{' '}
+            <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              →
+            </span>
+          </h2>
+          <p class="m-0 max-w-[30ch] text-sm opacity-50">
+            Generate architectural models in Rhino 8 via Grasshopper.
+          </p>
+        </a>
 
-# Add conical roof
-roof_height = radius * math.tan(math.radians(30))
-roof_point = (0, 0, num_floors * floor_height + roof_height)
-roof = rs.AddCone((0, 0, num_floors * floor_height), roof_point, radius)
+        <a
+          href="/features#revit-integration"
+          class="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+        >
+          <h2 class="mb-3 text-2xl font-semibold">
+            Revit Integration{' '}
+            <span class="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              →
+            </span>
+          </h2>
+          <p class="m-0 max-w-[30ch] text-sm opacity-50">
+            Convert models to BIM files for Revit seamlessly.
+          </p>
+        </a>
+      </div>
 
-# Add windows to each floor
-window_width = 2
-window_height = 2.5
-num_windows = 8
-for floor in range(num_floors):
-    for i in range(num_windows):
-        angle = i * (2 * math.pi / num_windows)
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        window_center = (x, y, floor * floor_height + floor_height/2)
-        # Create window (simplified as rectangle for this example)
-        rs.AddRectangle(rs.PlaneFromNormal(window_center, (x, y, 0)), window_width, window_height)</code></pre>
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                    <div>
-                      <h4 class="font-medium text-gray-800 mb-2">Rhino 3D Model:</h4>
-                      <div class="bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center">
-                        <p class="text-gray-500 text-center">[Rhino Model Visualization]<br/><span class="text-sm">Image would be displayed here</span></p>
-                      </div>
-                    </div>
-                    <div>
-                      <h4 class="font-medium text-gray-800 mb-2">Revit BIM Model:</h4>
-                      <div class="bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center">
-                        <p class="text-gray-500 text-center">[Revit BIM Visualization]<br/><span class="text-sm">Image would be displayed here</span></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-white overflow-hidden shadow rounded-lg project-card" data-project-id="2">
-                <div class="px-4 py-5 sm:p-6">
-                  <h3 class="text-2xl font-bold text-gray-900 mb-4">Organic Pavilion Structure</h3>
-                  <p class="text-gray-600 mb-6">An organic pavilion with curved roof surfaces supported by branching columns, designed for a public park.</p>
-                  <div class="bg-blue-50 p-4 rounded-md mb-8">
-                    <h4 class="font-medium text-blue-800 mb-2">Text Prompt:</h4>
-                    <p class="text-gray-700 italic">"Design an organic pavilion with three curved roof surfaces that flow into each other. Support the roof with five branching columns that resemble tree trunks. The pavilion should be approximately 15 meters in diameter and have a maximum height of 6 meters."</p>
-                  </div>
-                  <!-- Code section truncated for brevity -->
-                </div>
-              </div>
-              <div class="bg-white overflow-hidden shadow rounded-lg project-card" data-project-id="3">
-                <div class="px-4 py-5 sm:p-6">
-                  <h3 class="text-2xl font-bold text-gray-900 mb-4">Modular Housing Complex</h3>
-                  <p class="text-gray-600 mb-6">A modular housing complex with stacked units of varying sizes, creating a dynamic facade with integrated balconies.</p>
-                  <!-- Content truncated for brevity -->
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="mt-16 text-center max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-6">Transform Your Architectural Workflow</h2>
+        <p class="max-w-2xl mx-auto">
+          Our one-stop solution leverages AI to convert natural language into architectural designs. 
+          Simply describe what you want, and our system generates Python code that creates models in 
+          Rhino 8 through Grasshopper integration, then converts them to BIM files for Revit.
+        </p>
+        <div class="mt-8">
+          <a href="/workflow" class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+            See How It Works
+          </a>
         </div>
+      </div>
+
+      <div id="project-examples" class="mt-24 max-w-4xl mx-auto px-6 mb-24">
+        <h2 class="text-3xl font-bold mb-6 text-center">Project Examples</h2>
+        <p class="mb-12 text-center">
+          See how MAIVI transforms text descriptions into architectural models through Rhino and Revit.
+        </p>
       </div>
     </main>
     <footer class="bg-gray-50">
@@ -191,5 +132,6 @@ for floor in range(num_floors):
     </footer>
   </div>
   <script src="/js/main.js"></script>
+  <script src="/js/home-chatbot.js"></script>
 </body>
 </html>
