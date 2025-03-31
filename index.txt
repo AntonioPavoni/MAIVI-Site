@@ -1,0 +1,164 @@
+1:"$Sreact.fragment"
+2:I[4612,["612","static/chunks/612-c0e95c9586e1adee.js","974","static/chunks/app/page-f5c0804bad8e4c8b.js"],""]
+3:I[9729,[],""]
+4:I[9829,[],""]
+8:I[5358,[],"OutletBoundary"]
+a:I[5358,[],"MetadataBoundary"]
+c:I[5358,[],"ViewportBoundary"]
+e:I[672,[],""]
+:HL["/_next/static/media/a34f9d1faa5f3315-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/css/c059103e54287f73.css","style"]
+5:T446,import rhinoscriptsyntax as rs
+import math
+
+# Create tower base
+radius = 10
+floor_height = 4
+num_floors = 5
+
+# Generate cylinder for each floor
+floor_cylinders = []
+for i in range(num_floors):
+    base_point = (0, 0, i * floor_height)
+    height_point = (0, 0, (i + 1) * floor_height)
+    cylinder = rs.AddCylinder(base_point, height_point, radius)
+    floor_cylinders.append(cylinder)
+
+# Add conical roof
+roof_height = radius * math.tan(math.radians(30))
+roof_point = (0, 0, num_floors * floor_height + roof_height)
+roof = rs.AddCone((0, 0, num_floors * floor_height), roof_point, radius)
+
+# Add windows to each floor
+window_width = 2
+window_height = 2.5
+num_windows = 8
+for floor in range(num_floors):
+    for i in range(num_windows):
+        angle = i * (2 * math.pi / num_windows)
+        x = radius * math.cos(angle)
+        y = radius * math.sin(angle)
+        window_center = (x, y, floor * floor_height + floor_height/2)
+        # Create window (simplified as rectangle for this example)
+        rs.AddRectangle(rs.PlaneFromNormal(window_center, (x, y, 0)), window_width, window_height)6:T65f,import rhinoscriptsyntax as rs
+import random
+
+# Pavilion parameters
+diameter = 15
+max_height = 6
+num_columns = 5
+num_roof_surfaces = 3
+
+# Create base circle
+base_circle = rs.AddCircle([0, 0, 0], diameter/2)
+
+# Create columns
+columns = []
+for i in range(num_columns):
+    angle = i * (2 * math.pi / num_columns)
+    x = (diameter/2 - 1) * math.cos(angle)
+    y = (diameter/2 - 1) * math.sin(angle)
+    
+    # Create main trunk
+    base_point = [x, y, 0]
+    mid_point = [x, y, max_height * 0.6]
+    trunk = rs.AddLine(base_point, mid_point)
+    columns.append(trunk)
+    
+    # Create branches (3 per trunk)
+    for j in range(3):
+        branch_angle = angle + random.uniform(-0.5, 0.5)
+        branch_length = random.uniform(2, 4)
+        dx = branch_length * math.cos(branch_angle)
+        dy = branch_length * math.sin(branch_angle)
+        end_point = [x + dx, y + dy, max_height * 0.8]
+        branch = rs.AddLine(mid_point, end_point)
+        columns.append(branch)
+
+# Create roof control points
+roof_points = []
+for i in range(num_roof_surfaces * 4):
+    angle = i * (2 * math.pi / (num_roof_surfaces * 4))
+    x = diameter/2 * math.cos(angle)
+    y = diameter/2 * math.sin(angle)
+    z = max_height - random.uniform(0, max_height * 0.3)
+    roof_points.append([x, y, z])
+
+# Create roof surfaces
+roof_curves = []
+for i in range(0, len(roof_points), 4):
+    pts = roof_points[i:i+4]
+    if len(pts) < 4:  # Handle wrap-around for last curve
+        pts += roof_points[:4-len(pts)]
+    curve = rs.AddInterpCurve(pts)
+    roof_curves.append(curve)
+
+# Create loft surface between curves
+roof_surface = rs.AddLoftSrf(roof_curves)7:T832,import rhinoscriptsyntax as rs
+import random
+
+# Parameters
+min_width, max_width = 6, 8
+min_depth, max_depth = 8, 12
+min_height, max_height = 3, 3.5
+max_stories = 5
+num_units = 20
+balcony_probability = 0.6
+
+# Grid settings
+grid_x, grid_y = 5, 4  # Grid divisions for placement
+
+# Create units
+units = []
+occupied_positions = set()
+story_heights = [0] * (grid_x * grid_y)  # Track height at each position
+
+for i in range(num_units):
+    # Unit dimensions
+    width = random.uniform(min_width, max_width)
+    depth = random.uniform(min_depth, max_depth)
+    height = random.uniform(min_height, max_height)
+    
+    # Find position
+    placed = False
+    attempts = 0
+    while not placed and attempts < 100:
+        grid_pos_x = random.randint(0, grid_x-1)
+        grid_pos_y = random.randint(0, grid_y-1)
+        pos_index = grid_pos_y * grid_x + grid_pos_x
+        
+        # Check if position is available and not too high
+        current_height = story_heights[pos_index]
+        if current_height < max_stories * max_height:
+            # Position in 3D space
+            x = grid_pos_x * max_width
+            y = grid_pos_y * max_depth
+            z = current_height
+            
+            # Create unit box
+            unit_box = rs.AddBox([x, y, z], [width, depth, height])
+            units.append(unit_box)
+            
+            # Update height at this position
+            story_heights[pos_index] += height
+            
+            # Add balcony with probability
+            if random.random() < balcony_probability:
+                balcony_depth = 1.5
+                balcony_width = width * 0.7
+                balcony_x = x + (width - balcony_width) / 2
+                balcony_y = y - balcony_depth
+                balcony_z = z
+                balcony = rs.AddBox([balcony_x, balcony_y, balcony_z], 
+                                   [balcony_width, balcony_depth, 1])
+                units.append(balcony)
+            
+            placed = True
+        
+        attempts += 1
+
+# Add ground plane
+ground = rs.AddPlaneSurface([0, 0, 0], [grid_x * max_width, grid_y * max_depth])0:{"P":null,"b":"MmCaCkLd165XoC_8nH00R","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/c059103e54287f73.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__className_d65c78","children":["$","div",null,{"className":"min-h-screen flex flex-col","children":[["$","header",null,{"className":"bg-white shadow-sm","children":["$","div",null,{"className":"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8","children":["$","div",null,{"className":"flex justify-between h-16","children":["$","div",null,{"className":"flex","children":[["$","div",null,{"className":"flex-shrink-0 flex items-center","children":["$","$L2",null,{"href":"/","className":"font-bold text-xl text-blue-600","children":"ArchitectureAI"}]}],["$","nav",null,{"className":"hidden sm:ml-6 sm:flex sm:space-x-8","children":[["$","$L2",null,{"href":"/","className":"inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300","children":"Home"}],["$","$L2",null,{"href":"/features","className":"inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300","children":"Features"}],["$","$L2",null,{"href":"/workflow","className":"inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300","children":"Workflow"}],["$","$L2",null,{"href":"/about","className":"inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300","children":"About"}]]}]]}]}]}]}],["$","main",null,{"className":"flex-grow","children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","footer",null,{"className":"bg-gray-50","children":["$","div",null,{"className":"max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8","children":["$","div",null,{"className":"md:flex md:items-center md:justify-between","children":[["$","div",null,{"className":"flex justify-center space-x-6 md:order-2","children":["$","a",null,{"href":"https://github.com","className":"text-gray-400 hover:text-gray-500","target":"_blank","rel":"noopener noreferrer","children":[["$","span",null,{"className":"sr-only","children":"GitHub"}],["$","svg",null,{"className":"h-6 w-6","fill":"currentColor","viewBox":"0 0 24 24","aria-hidden":"true","children":["$","path",null,{"fillRule":"evenodd","d":"M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z","clipRule":"evenodd"}]}]]}]}],["$","div",null,{"className":"mt-8 md:mt-0 md:order-1","children":["$","p",null,{"className":"text-center text-base text-gray-400","children":"© 2025 ArchitectureAI. All rights reserved."}]}]]}]}]}]]}]}]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"flex min-h-screen flex-col items-center justify-between p-6 md:p-24","children":[["$","div",null,{"className":"z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex","children":[["$","div",null,{"className":"fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none","children":["$","div",null,{"className":"flex place-items-center gap-2 p-8 lg:p-0","children":["$","$L2",null,{"href":"/","className":"font-bold text-xl","children":"ArchitectureAI"}]}]}],["$","div",null,{"className":"fixed bottom-0 left-0 flex h-48 w-full items-end justify-center lg:static lg:h-auto lg:w-auto lg:bg-none","children":["$","nav",null,{"className":"flex gap-4","children":[["$","$L2",null,{"href":"/features","className":"hover:text-blue-600 transition-colors","children":"Features"}],["$","$L2",null,{"href":"/workflow","className":"hover:text-blue-600 transition-colors","children":"Workflow"}],["$","$L2",null,{"href":"/about","className":"hover:text-blue-600 transition-colors","children":"About"}]]}]}]]}],["$","div",null,{"className":"relative flex place-items-center my-16","children":["$","h1",null,{"className":"text-5xl font-bold text-center","children":["Architecture",["$","span",null,{"className":"text-blue-600","children":"AI"}]]}]}],["$","div",null,{"className":"mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left","children":[["$","div",null,{"className":"group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30","children":[["$","h2",null,{"className":"mb-3 text-2xl font-semibold","children":["Text to Code"," ",["$","span",null,{"className":"inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none","children":"→"}]]}],["$","p",null,{"className":"m-0 max-w-[30ch] text-sm opacity-50","children":"Convert natural language to Python code with our advanced AI."}]]}],["$","div",null,{"className":"group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30","children":[["$","h2",null,{"className":"mb-3 text-2xl font-semibold","children":["Rhino Integration"," ",["$","span",null,{"className":"inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none","children":"→"}]]}],["$","p",null,{"className":"m-0 max-w-[30ch] text-sm opacity-50","children":"Generate architectural models in Rhino 8 via Grasshopper."}]]}],["$","div",null,{"className":"group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30","children":[["$","h2",null,{"className":"mb-3 text-2xl font-semibold","children":["Revit Integration"," ",["$","span",null,{"className":"inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none","children":"→"}]]}],["$","p",null,{"className":"m-0 max-w-[30ch] text-sm opacity-50","children":"Convert models to BIM files for Revit seamlessly."}]]}]]}],["$","div",null,{"className":"mt-16 text-center","children":[["$","h2",null,{"className":"text-3xl font-bold mb-6","children":"Transform Your Architectural Workflow"}],["$","p",null,{"className":"max-w-2xl mx-auto","children":"Our one-stop solution leverages AI to convert natural language into architectural designs. Simply describe what you want, and our system generates Python code that creates models in Rhino 8 through Grasshopper integration, then converts them to BIM files for Revit."}],["$","div",null,{"className":"mt-8","children":["$","$L2",null,{"href":"/workflow","className":"px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors","children":"See How It Works"}]}]]}],["$","div",null,{"className":"py-12","children":["$","div",null,{"className":"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900 sm:text-4xl","children":"Project Examples"}],["$","p",null,{"className":"mt-4 text-lg text-gray-500 max-w-3xl mx-auto","children":"See how ArchitectureAI transforms text descriptions into architectural models through Rhino and Revit."}]]}],["$","div",null,{"className":"space-y-24","children":[["$","div","1",{"className":"bg-white overflow-hidden shadow rounded-lg","children":["$","div",null,{"className":"px-4 py-5 sm:p-6","children":[["$","h3",null,{"className":"text-2xl font-bold text-gray-900 mb-4","children":"Parametric Tower Design"}],["$","p",null,{"className":"text-gray-600 mb-6","children":"A cylindrical tower with parametric floor heights and a conical roof, featuring evenly spaced windows around each floor."}],["$","div",null,{"className":"bg-blue-50 p-4 rounded-md mb-8","children":[["$","h4",null,{"className":"font-medium text-blue-800 mb-2","children":"Text Prompt:"}],["$","p",null,{"className":"text-gray-700 italic","children":["\"","Create a cylindrical tower with 5 floors, each floor having a height of 4 meters. Add a conical roof with a 30-degree slope. Place rectangular windows evenly spaced around each floor.","\""]}]]}],["$","div",null,{"className":"mb-8","children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Generated Python Code:"}],["$","div",null,{"className":"bg-gray-100 rounded-md overflow-hidden ","children":[["$","div",null,{"className":"px-4 py-2 bg-gray-200 border-b border-gray-300 text-sm font-medium text-gray-700","children":"python"}],["$","pre",null,{"className":"p-4 overflow-x-auto","children":["$","code",null,{"className":"text-sm font-mono","children":"$5"}]}]]}]]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-6 mt-8","children":[["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Rhino 3D Model:"}],["$","div",null,{"className":"bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center","children":["$","p",null,{"className":"text-gray-500 text-center","children":["[Rhino Model Visualization]",["$","br",null,{}],["$","span",null,{"className":"text-sm","children":"Image would be displayed here"}]]}]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Revit BIM Model:"}],["$","div",null,{"className":"bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center","children":["$","p",null,{"className":"text-gray-500 text-center","children":["[Revit BIM Visualization]",["$","br",null,{}],["$","span",null,{"className":"text-sm","children":"Image would be displayed here"}]]}]}]]}]]}]]}]}],["$","div","2",{"className":"bg-white overflow-hidden shadow rounded-lg","children":["$","div",null,{"className":"px-4 py-5 sm:p-6","children":[["$","h3",null,{"className":"text-2xl font-bold text-gray-900 mb-4","children":"Organic Pavilion Structure"}],["$","p",null,{"className":"text-gray-600 mb-6","children":"An organic pavilion with curved roof surfaces supported by branching columns, designed for a public park."}],["$","div",null,{"className":"bg-blue-50 p-4 rounded-md mb-8","children":[["$","h4",null,{"className":"font-medium text-blue-800 mb-2","children":"Text Prompt:"}],["$","p",null,{"className":"text-gray-700 italic","children":["\"","Design an organic pavilion with three curved roof surfaces that flow into each other. Support the roof with five branching columns that resemble tree trunks. The pavilion should be approximately 15 meters in diameter and have a maximum height of 6 meters.","\""]}]]}],["$","div",null,{"className":"mb-8","children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Generated Python Code:"}],["$","div",null,{"className":"bg-gray-100 rounded-md overflow-hidden ","children":[["$","div",null,{"className":"px-4 py-2 bg-gray-200 border-b border-gray-300 text-sm font-medium text-gray-700","children":"python"}],["$","pre",null,{"className":"p-4 overflow-x-auto","children":["$","code",null,{"className":"text-sm font-mono","children":"$6"}]}]]}]]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-6 mt-8","children":[["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Rhino 3D Model:"}],["$","div",null,{"className":"bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center","children":["$","p",null,{"className":"text-gray-500 text-center","children":["[Rhino Model Visualization]",["$","br",null,{}],["$","span",null,{"className":"text-sm","children":"Image would be displayed here"}]]}]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Revit BIM Model:"}],["$","div",null,{"className":"bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center","children":["$","p",null,{"className":"text-gray-500 text-center","children":["[Revit BIM Visualization]",["$","br",null,{}],["$","span",null,{"className":"text-sm","children":"Image would be displayed here"}]]}]}]]}]]}]]}]}],["$","div","3",{"className":"bg-white overflow-hidden shadow rounded-lg","children":["$","div",null,{"className":"px-4 py-5 sm:p-6","children":[["$","h3",null,{"className":"text-2xl font-bold text-gray-900 mb-4","children":"Modular Housing Complex"}],["$","p",null,{"className":"text-gray-600 mb-6","children":"A modular housing complex with stacked units of varying sizes, creating a dynamic facade with integrated balconies."}],["$","div",null,{"className":"bg-blue-50 p-4 rounded-md mb-8","children":[["$","h4",null,{"className":"font-medium text-blue-800 mb-2","children":"Text Prompt:"}],["$","p",null,{"className":"text-gray-700 italic","children":["\"","Create a modular housing complex with 20 rectangular units of varying sizes (between 6x8 meters and 8x12 meters). Stack the units in an irregular pattern to create a dynamic facade, with a maximum height of 5 stories. Add balconies to 60% of the units on the front facade.","\""]}]]}],["$","div",null,{"className":"mb-8","children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Generated Python Code:"}],["$","div",null,{"className":"bg-gray-100 rounded-md overflow-hidden ","children":[["$","div",null,{"className":"px-4 py-2 bg-gray-200 border-b border-gray-300 text-sm font-medium text-gray-700","children":"python"}],["$","pre",null,{"className":"p-4 overflow-x-auto","children":["$","code",null,{"className":"text-sm font-mono","children":"$7"}]}]]}]]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-6 mt-8","children":[["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Rhino 3D Model:"}],["$","div",null,{"className":"bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center","children":["$","p",null,{"className":"text-gray-500 text-center","children":["[Rhino Model Visualization]",["$","br",null,{}],["$","span",null,{"className":"text-sm","children":"Image would be displayed here"}]]}]}]]}],["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-gray-800 mb-2","children":"Revit BIM Model:"}],["$","div",null,{"className":"bg-gray-100 rounded-md p-4 h-64 flex items-center justify-center","children":["$","p",null,{"className":"text-gray-500 text-center","children":["[Revit BIM Visualization]",["$","br",null,{}],["$","span",null,{"className":"text-sm","children":"Image would be displayed here"}]]}]}]]}]]}]]}]}]]}],["$","div",null,{"className":"text-center mt-12","children":["$","$L2",null,{"href":"/workflow","className":"px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors","children":"Learn More About Our Workflow"}]}]]}]}]]}],null,["$","$L8",null,{"children":"$L9"}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","gv51P5bojIabgiMpSoUuI",{"children":[["$","$La",null,{"children":"$Lb"}],["$","$Lc",null,{"children":"$Ld"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]]}],false]],"m":"$undefined","G":["$e","$undefined"],"s":false,"S":true}
+d:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+b:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"ArchitectureAI - AI-Powered Architecture Design"}],["$","meta","2",{"name":"description","content":"Transform text to architectural designs with AI. Generate Python code for Rhino and Revit integration."}],["$","link","3",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}]]
+9:null

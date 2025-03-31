@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charSet="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="preload" href="/_next/static/media/a34f9d1faa5f3315-s.p.woff2" as="font" crossorigin="" type="font/woff2"/>
+  <link rel="stylesheet" href="/_next/static/css/c059103e54287f73.css" data-precedence="next"/>
+  <link rel="stylesheet" href="/dark-theme.css"/>
+  <link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-61cbad9178851632.js"/>
+  <script src="/_next/static/chunks/ebe977ba-d647754c57af19fd.js" async=""></script>
+  <script src="/_next/static/chunks/411-eae42c920592eb8e.js" async=""></script>
+  <script src="/_next/static/chunks/main-app-6e02a17a24ca3858.js" async=""></script>
+  <script src="/_next/static/chunks/612-c0e95c9586e1adee.js" async=""></script>
+  <script src="/_next/static/chunks/app/workflow/page-98ca74b6a325661e.js" async=""></script>
+  <meta name="next-size-adjust" content=""/>
+  <title>MAIVI - Workflow</title>
+  <meta name="description" content="Learn about the workflow of MAIVI's AI-powered architecture design software."/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16"/>
+  <script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script>
+</head>
+<body class="__className_d65c78">
+  <div class="min-h-screen flex flex-col">
+    <header class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="flex-shrink-0 flex items-center">
+              <a class="font-bold text-xl text-blue-600" href="/">MAIVI</a>
+            </div>
+            <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/">Home</a>
+              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/features">Features</a>
+              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm font-medium text-gray-900" href="/workflow">Workflow</a>
+              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/about">About</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow">
+      <div class="flex min-h-screen flex-col items-center p-6 md:p-24">
+        <h1 class="text-4xl font-bold mb-12">MAIVI Workflow</h1>
+        
+        <div class="max-w-4xl w-full">
+          <div class="bg-white p-8 rounded-lg shadow-md mb-12">
+            <h2 class="text-3xl font-semibold mb-6 text-center">From Text to Architecture in Minutes</h2>
+            <p class="text-lg text-center mb-8">Our streamlined workflow transforms your text descriptions into architectural models and BIM files with minimal effort.</p>
+            
+            <div class="space-y-16">
+              <div class="workflow-step active">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                  <div class="md:col-span-1 text-center">
+                    <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 text-2xl font-bold">1</div>
+                  </div>
+                  <div class="md:col-span-2">
+                    <h3 class="text-2xl font-medium mb-3">Text Input</h3>
+                    <p class="mb-4">Describe your architectural design in plain language. Be as detailed or as conceptual as you like.</p>
+                    <div class="bg-blue-50 p-4 rounded-md">
+                      <p class="italic">"Create a residential tower with 20 floors. The tower should have a circular base with a diameter of 30 meters for the first 5 floors, then transition to an elliptical form for the remaining floors, with the major axis aligned east-west. Add balconies on the south-facing side of each floor."</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="workflow-step">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                  <div class="md:col-span-1 text-center">
+                    <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 text-2xl font-bold">2</div>
+                  </div>
+                  <div class="md:col-span-2">
+                    <h3 class="text-2xl font-medium mb-3">AI Code Generation</h3>
+                    <p class="mb-4">Our AI analyzes your description and generates optimized Python code to create your design in Rhino.</p>
+                    <div class="bg-gray-800 p-4 rounded-md">
+                      <pre class="text-green-400 text-sm overflow-x-auto">import rhinoscriptsyntax as rs
+import math
+
+# Parameters from description
+num_floors = 20
+base_diameter = 30
+transition_floor = 5
+
+# Create base floors (circular)
+base_floors = []
+for i in range(transition_floor):
+    center = [0, 0, i * 4]  # 4m floor height
+    circle = rs.AddCircle(rs.PlaneFromNormal(center, [0, 0, 1]), base_diameter/2)
+    floor = rs.ExtrudeCurveStraight(circle, center, [0, 0, 4])
+    base_floors.append(floor)
+    
+# Create upper floors (elliptical)
+upper_floors = []
+for i in range(transition_floor, num_floors):
+    center = [0, 0, i * 4]
+    ellipse = rs.AddEllipse(rs.PlaneFromNormal(center, [0, 0, 1]), base_diameter/2, base_diameter/3)
+    floor = rs.ExtrudeCurveStraight(ellipse, center, [0, 0, 4])
+    upper_floors.append(floor)
+    
+# Add south-facing balconies
+for i in range(num_floors):
+    # Balcony parameters
+    balcony_depth = 2
+    balcony_width = 4
+    balcony_height = 1
+    
+    # Position at south side
+    if i < transition_floor:
+        balcony_center = [0, -base_diameter/2, i * 4 + 2]
+    else:
+        balcony_center = [0, -base_diameter/3, i * 4 + 2]
+    
+    # Create balcony
+    balcony = rs.AddBox(rs.PlaneFromNormal(balcony_center, [0, -1, 0]), 
+                        balcony_width, balcony_depth, balcony_height)</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="workflow-step">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                  <div class="md:col-span-1 text-center">
+                    <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 text-2xl font-bold">3</div>
+                  </div>
+                  <div class="md:col-span-2">
+                    <h3 class="text-2xl font-medium mb-3">Rhino Model Generation</h3>
+                    <p class="mb-4">The Python code is executed in Rhino via Grasshopper, creating a 3D model of your design that you can view and refine.</p>
+                    <div class="bg-gray-100 p-4 rounded-md h-48 flex items-center justify-center">
+                      <p class="text-gray-500 text-center">[Rhino 3D Model Visualization]</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="workflow-step">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                  <div class="md:col-span-1 text-center">
+                    <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 text-2xl font-bold">4</div>
+                  </div>
+                  <div class="md:col-span-2">
+                    <h3 class="text-2xl font-medium mb-3">Revit BIM Conversion</h3>
+                    <p class="mb-4">The Rhino model is automatically converted to a Revit-compatible BIM file, preserving all geometric and parametric information.</p>
+                    <div class="bg-gray-100 p-4 rounded-md h-48 flex items-center justify-center">
+                      <p class="text-gray-500 text-center">[Revit BIM Model Visualization]</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="workflow-step">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                  <div class="md:col-span-1 text-center">
+                    <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 text-2xl font-bold">5</div>
+                  </div>
+                  <div class="md:col-span-2">
+                    <h3 class="text-2xl font-medium mb-3">Refinement & Iteration</h3>
+                    <p class="mb-4">Refine your design by modifying your text description or directly editing the generated code. MAIVI learns from your changes to improve future results.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                      <div class="bg-blue-50 p-3 rounded-md">
+                        <p class="text-sm italic">"Add a rooftop garden with curved pathways and seating areas."</p>
+                      </div>
+                      <div class="bg-gray-100 p-3 rounded-md flex items-center justify-center">
+                        <p class="text-gray-500 text-sm text-center">[Updated Model Preview]</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold mb-6 text-center">Benefits of the MAIVI Workflow</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="border border-gray-200 rounded-lg p-6">
+                <h3 class="text-xl font-medium mb-3 text-blue-600">Speed & Efficiency</h3>
+                <p>Generate complex architectural models in minutes instead of hours or days. Rapid iteration allows you to explore more design options in less time.</p>
+              </div>
+              
+              <div class="border border-gray-200 rounded-lg p-6">
+                <h3 class="text-xl font-medium mb-3 text-blue-600">Accessibility</h3>
+                <p>No coding experience required. Express your architectural ideas in natural language and let MAIVI handle the technical implementation.</p>
+              </div>
+              
+              <div class="border border-gray-200 rounded-lg p-6">
+                <h3 class="text-xl font-medium mb-3 text-blue-600">Seamless Integration</h3>
+                <p>Work with industry-standard tools like Rhino and Revit without friction. MAIVI bridges the gap between conceptual design and technical implementation.</p>
+              </div>
+              
+              <div class="border border-gray-200 rounded-lg p-6">
+                <h3 class="text-xl font-medium mb-3 text-blue-600">Continuous Learning</h3>
+                <p>MAIVI learns from your feedback and design choices, becoming more aligned with your architectural style and preferences over time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-gray-50">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="md:flex md:items-center md:justify-between">
+          <div class="flex justify-center space-x-6 md:order-2">
+            <a href="https://github.com" class="text-gray-400 hover:text-gray-500" target="_blank" rel="noopener noreferrer">
+              <span class="sr-only">GitHub</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+              </svg>
+            </a>
+          </div>
+          <div class="mt-8 md:mt-0 md:order-1">
+            <p class="text-center text-base text-gray-400">
+              &copy; 2025 MAIVI. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="/js/main.js"></script>
+</body>
+</html>
