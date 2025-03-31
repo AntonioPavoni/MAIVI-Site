@@ -4,15 +4,68 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MAIVI - AI-Powered Architecture Design</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   <link rel="stylesheet" href="/dark-theme.css">
   <link rel="stylesheet" href="/chatbot-interface.css">
+  <style>
+    /* Additional styles to ensure proper layout */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .logo-container img {
+      height: 60px;
+      margin-right: 15px;
+    }
+    .logo-container h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    nav ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 0 1rem;
+    }
+    .feature-card {
+      background-color: #1a1a1a;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      transition: background-color 0.3s;
+    }
+    .feature-card:hover {
+      background-color: #2a2a2a;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    /* Preserve chatbot styles */
+    #project-examples .chat-container {
+      margin-top: 2rem;
+    }
+  </style>
   <script src="/js/main.js" defer></script>
   <script src="/js/home-chatbot.js" defer></script>
 </head>
 <body class="dark-theme">
   <header class="bg-black text-white p-4">
     <div class="container mx-auto flex justify-between items-center">
-      <a href="/" class="text-blue-500 font-bold text-xl">MAIVI</a>
+      <a href="/" class="text-blue-500 font-bold text-xl flex items-center">
+        <img src="/logo.png" alt="MAIVI Logo" class="h-8 mr-2">
+        MAIVI
+      </a>
       <nav>
         <ul class="flex space-x-4">
           <li><a href="/" class="hover:text-blue-500">Home</a></li>
@@ -28,18 +81,22 @@
   <main>
     <section class="py-16">
       <div class="container mx-auto text-center">
-        <h1 class="text-5xl font-bold mb-8">MAIVI</h1>
+        <div class="logo-container">
+          <img src="/logo.png" alt="MAIVI Logo">
+          <h1>MAIVI</h1>
+        </div>
+        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <a href="/features#text-to-code" class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Text to Code{' '} → </h3>
+          <a href="/features#text-to-code" class="feature-card hover:bg-gray-700 transition">
+            <h3 class="text-xl font-semibold mb-2">Text to Code → </h3>
             <p class="text-gray-400">Convert natural language to Python code with our advanced AI.</p>
           </a>
-          <a href="/features#rhino-integration" class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Rhino Integration{' '} → </h3>
+          <a href="/features#rhino-integration" class="feature-card hover:bg-gray-700 transition">
+            <h3 class="text-xl font-semibold mb-2">Rhino Integration → </h3>
             <p class="text-gray-400">Generate architectural models in Rhino 8 via Grasshopper.</p>
           </a>
-          <a href="/features#revit-integration" class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h3 class="text-xl font-semibold mb-2">Revit Integration{' '} → </h3>
+          <a href="/features#revit-integration" class="feature-card hover:bg-gray-700 transition">
+            <h3 class="text-xl font-semibold mb-2">Revit Integration → </h3>
             <p class="text-gray-400">Convert models to BIM files for Revit seamlessly.</p>
           </a>
         </div>
@@ -58,11 +115,11 @@
 
     <section class="py-16 bg-gray-900">
       <div class="container mx-auto">
-        <!-- This div needs an ID for the JavaScript to target -->
+        <!-- This div has an ID for the JavaScript to target -->
         <div id="project-examples" class="text-center">
-          <h2 class="text-3xl font-bold mb-6">Project Examples</h2>
+          <h2 class="text-3xl font-bold mb-6">Interactive Demo</h2>
           <p class="mb-8">
-            See how MAIVI transforms text descriptions into architectural models through Rhino and Revit.
+            See how MAIVI transforms text descriptions into architectural models:
           </p>
           <!-- The JavaScript will replace this content with the chatbot interface -->
         </div>
@@ -80,4 +137,3 @@
   </footer>
 </body>
 </html>
-
