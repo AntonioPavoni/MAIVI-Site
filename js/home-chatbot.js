@@ -1,4 +1,4 @@
-// Enhanced chatbot interface with dropdown menu for predefined prompts
+// home-chatbot.js - Add to your /js folder
 document.addEventListener('DOMContentLoaded', function() {
   // Find the project examples section on the home page
   const projectSection = document.getElementById('project-examples');
@@ -462,5 +462,103 @@ def analyze_text(text):
     return {
         "type": "building",
         "style": "modern",
-        "features": 
-(Content truncated due to size limit. Use line ranges to read in chunks)
+        "features": ["parametric", "sustainable"]
+    }
+
+def create_base_geometry(elements):
+    # Create base geometry based on elements
+    width = 20
+    length = 30
+    height = 15
+    
+    # Create main building volume
+    base_point = rs.WorldXYPlane().Origin
+    x_axis = rs.WorldXYPlane().XAxis
+    y_axis = rs.WorldXYPlane().YAxis
+    z_axis = rs.WorldXYPlane().ZAxis
+    
+    building_box = rs.AddBox(rs.PlaneFromFrame(base_point, x_axis, y_axis, z_axis), width, length, height)
+    
+    # Add architectural elements
+    roof = create_roof(width, length, height)
+    windows = create_windows(width, length, height)
+    entrance = create_entrance(width, length)
+    
+    return [building_box, roof, windows, entrance]
+
+def create_roof(width, length, height):
+    # Create a parametric roof
+    roof_height = height * 0.2
+    roof_points = []
+    
+    # Create roof surface
+    for i in range(5):
+        for j in range(5):
+            x = (i / 4) * width - width/2
+            y = (j / 4) * length - length/2
+            z = height
+            
+            # Add some parametric variation
+            z_offset = math.sin(x * 0.5) * math.cos(y * 0.5) * roof_height
+            roof_points.append([x, y, z + z_offset])
+    
+    # Create roof surface from points
+    roof = rs.AddSrfControlPtGrid(5, 5, roof_points)
+    return roof
+
+def create_windows(width, length, height):
+    # Create windows on facades
+    windows = []
+    
+    # Front facade windows
+    for i in range(3):
+        for j in range(5):
+            x = (i + 1) * width/4 - width/2
+            y = -length/2
+            z = (j + 1) * height/6
+            
+            window = rs.AddRectangle(rs.PlaneFromNormal([x, y, z], [0, -1, 0]), 2, 1.5)
+            window = rs.ExtrudeCurveStraight(window, [0, 0, 0], [0, -0.3, 0])
+            windows.append(window)
+    
+    # Side facade windows
+    for i in range(3):
+        for j in range(5):
+            x = width/2
+            y = (i + 1) * length/4 - length/2
+            z = (j + 1) * height/6
+            
+            window = rs.AddRectangle(rs.PlaneFromNormal([x, y, z], [1, 0, 0]), 2, 1.5)
+            window = rs.ExtrudeCurveStraight(window, [0, 0, 0], [0.3, 0, 0])
+            windows.append(window)
+    
+    return windows
+
+def create_entrance(width, length):
+    # Create main entrance
+    entrance_width = 4
+    entrance_height = 3
+    
+    entrance = rs.AddRectangle(rs.PlaneFromNormal([0, -length/2, 0], [0, -1, 0]), entrance_width, entrance_height)
+    entrance = rs.ExtrudeCurveStraight(entrance, [0, 0, 0], [0, -0.5, 0])
+    
+    return entrance
+
+def apply_architectural_features(base, elements):
+    # Apply features based on elements
+    print("Applying architectural features...")
+    # Code would modify geometry based on features
+    return base
+
+def optimize_structure(geometry):
+    # Ensure structural integrity
+    print("Optimizing structure...")
+    # Code would analyze and optimize for structural integrity
+    return geometry
+
+# Execute the generation
+result = generate_architecture()
+print("Architecture generation complete!")`;
+    }
+  }
+}
