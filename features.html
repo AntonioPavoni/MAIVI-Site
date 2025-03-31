@@ -1,176 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charSet="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="preload" href="/_next/static/media/a34f9d1faa5f3315-s.p.woff2" as="font" crossorigin="" type="font/woff2"/>
-  <link rel="stylesheet" href="/_next/static/css/c059103e54287f73.css" data-precedence="next"/>
-  <link rel="stylesheet" href="/dark-theme.css"/>
-  <link rel="stylesheet" href="/chatbot-interface.css"/>
-  <link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-61cbad9178851632.js"/>
-  <script src="/_next/static/chunks/ebe977ba-d647754c57af19fd.js" async=""></script>
-  <script src="/_next/static/chunks/411-eae42c920592eb8e.js" async=""></script>
-  <script src="/_next/static/chunks/main-app-6e02a17a24ca3858.js" async=""></script>
-  <script src="/_next/static/chunks/612-c0e95c9586e1adee.js" async=""></script>
-  <script src="/_next/static/chunks/app/features/page-33655fc605c04eac.js" async=""></script>
-  <meta name="next-size-adjust" content=""/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MAIVI - Features</title>
-  <meta name="description" content="Explore the features of MAIVI's AI-powered architecture design software."/>
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16"/>
-  <script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="/dark-theme.css">
+  <style>
+    /* Additional styles to ensure proper layout */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    nav ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      margin: 0 1rem;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .feature-section {
+      padding: 3rem 0;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .feature-title {
+      color: #3b82f6;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+    .feature-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .feature-list {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .feature-list li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .feature-list li::before {
+      content: "•";
+      color: #3b82f6;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+  </style>
+  <script src="/js/main.js" defer></script>
 </head>
-<body class="__className_d65c78">
-  <div class="min-h-screen flex flex-col">
-    <header class="bg-white shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex">
-            <div class="flex-shrink-0 flex items-center">
-              <a class="font-bold text-xl text-blue-600" href="/">MAIVI</a>
-            </div>
-            <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/">Home</a>
-              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm font-medium text-gray-900" href="/features">Features</a>
-              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/workflow">Workflow</a>
-              <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="/about">About</a>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main class="flex-grow">
-      <div class="flex min-h-screen flex-col items-center p-6 md:p-24">
+<body class="dark-theme">
+  <header class="bg-black text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-blue-500 font-bold text-xl flex items-center">
+        <img src="/LOGO_2.png" alt="MAIVI Logo" class="h-8 mr-2">
+        MAIVI
+      </a>
+      <nav>
+        <ul class="flex space-x-4">
+          <li><a href="/" class="hover:text-blue-500">Home</a></li>
+          <li><a href="/features" class="hover:text-blue-500">Features</a></li>
+          <li><a href="/workflow" class="hover:text-blue-500">Workflow</a></li>
+          <li><a href="/about" class="hover:text-blue-500">About</a></li>
+        </ul>
+      </nav>
+      <button id="theme-toggle" class="p-2 rounded-full">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="py-12">
+      <div class="container mx-auto text-center">
         <h1 class="text-4xl font-bold mb-12">MAIVI Features</h1>
         
-        <div class="max-w-4xl w-full space-y-16">
-          <section id="ai-text-to-code" class="bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-3xl font-semibold mb-6 text-blue-600">AI Text-to-Code Conversion</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <p class="mb-4">Our advanced natural language processing system converts plain text descriptions into executable Python code. Simply describe what you want to build, and our AI generates the code to create it.</p>
-                <ul class="list-disc pl-5 space-y-2">
-                  <li>Understands architectural terminology and concepts</li>
-                  <li>Generates clean, optimized Python code</li>
-                  <li>Supports complex parametric designs</li>
-                  <li>Continuously learns from user feedback</li>
-                </ul>
-              </div>
-              <div class="bg-gray-100 p-4 rounded-md">
-                <h3 class="font-medium mb-2">Example:</h3>
-                <div class="mb-3">
-                  <p class="text-sm text-gray-700 mb-1">Input:</p>
-                  <div class="bg-blue-50 p-2 rounded text-sm">
-                    "Create a curved wall that is 10 meters long and 3 meters high with a thickness of 0.3 meters. Add 5 rectangular windows evenly spaced along the wall."
-                  </div>
-                </div>
-                <div>
-                  <p class="text-sm text-gray-700 mb-1">Output:</p>
-                  <div class="bg-gray-800 text-green-400 p-2 rounded text-xs font-mono overflow-x-auto">
-                    <pre>import rhinoscriptsyntax as rs
-import math
-
-# Parameters
-length = 10
-height = 3
-thickness = 0.3
-num_windows = 5
-window_width = 1.2
-window_height = 1.5
-
-# Create curved wall
-radius = length / (2 * math.sin(math.pi/4))
-arc = rs.AddArc(rs.WorldXYPlane(), radius, math.pi/2)
-wall = rs.ExtrudeCurve(arc, rs.AddLine([0,0,0], [0,0,height]))
-wall = rs.CapPlanarHoles(wall)
-
-# Add windows
-curve_params = rs.DivideCurve(arc, num_windows + 1, True, True)
-for i in range(1, len(curve_params) - 1):
-    param = curve_params[i]
-    point = rs.EvaluateCurve(arc, param)
-    normal = rs.CurveTangent(arc, param)
-    normal = rs.VectorRotate(normal, 90, [0,0,1])
-    window_plane = rs.PlaneFromNormal(
-        [point[0], point[1], height/2], 
-        normal)
-    window = rs.AddRectangle(
-        window_plane, 
-        window_width, 
-        window_height)
-    rs.BooleanDifference(wall, 
-        rs.ExtrudeCurve(window, 
-        rs.AddLine([0,0,-thickness/2], 
-        [0,0,thickness/2])))</pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          
-          <section id="rhino-integration" class="bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-3xl font-semibold mb-6 text-blue-600">Rhino 8 Integration</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <p class="mb-4">MAIVI seamlessly integrates with Rhino 8, executing the generated Python code directly within the Rhino environment through Grasshopper. This integration allows for immediate visualization and refinement of your architectural designs.</p>
-                <ul class="list-disc pl-5 space-y-2">
-                  <li>Direct execution in Rhino via Python scripting</li>
-                  <li>Grasshopper component for visual programming</li>
-                  <li>Real-time feedback and visualization</li>
-                  <li>Support for all Rhino geometric operations</li>
-                </ul>
-              </div>
-              <div class="bg-gray-100 p-4 rounded-md h-full flex items-center justify-center">
-                <div class="text-center">
-                  <p class="text-gray-500">[Rhino Integration Diagram]</p>
-                  <p class="text-sm text-gray-400 mt-2">Visualization of the integration workflow</p>
-                </div>
-              </div>
-            </div>
-          </section>
-          
-          <section id="revit-integration" class="bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-3xl font-semibold mb-6 text-blue-600">Revit Integration for BIM</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <p class="mb-4">Take your designs to the next level with our Revit integration. MAIVI automatically converts Rhino models into Revit-compatible BIM files, maintaining all parametric relationships and architectural information.</p>
-                <ul class="list-disc pl-5 space-y-2">
-                  <li>Automatic conversion to .bim format</li>
-                  <li>Preservation of parametric relationships</li>
-                  <li>Material and property mapping</li>
-                  <li>BIM data enrichment for construction documentation</li>
-                </ul>
-              </div>
-              <div class="bg-gray-100 p-4 rounded-md h-full flex items-center justify-center">
-                <div class="text-center">
-                  <p class="text-gray-500">[Revit BIM Conversion Process]</p>
-                  <p class="text-sm text-gray-400 mt-2">Visualization of the Rhino to Revit workflow</p>
-                </div>
-              </div>
-            </div>
-          </section>
+        <div id="text-to-code" class="feature-section">
+          <h2 class="feature-title">AI Text-to-Code Conversion</h2>
+          <p class="feature-description">
+            Our advanced natural language processing system converts plain text descriptions into executable
+            Python code. Simply describe what you want to build, and our AI generates the code to create it.
+          </p>
+          <ul class="feature-list">
+            <li>Understands architectural terminology and concepts</li>
+            <li>Generates clean, optimized Python code</li>
+            <li>Supports complex parametric designs</li>
+            <li>Continuously learns from user feedback</li>
+          </ul>
+        </div>
+        
+        <div id="rhino-integration" class="feature-section">
+          <h2 class="feature-title">Rhino 8 Integration</h2>
+          <p class="feature-description">
+            MAIVI seamlessly integrates with Rhino 8 through Grasshopper, allowing the generated Python code
+            to be executed directly within your modeling environment. This creates a smooth workflow from
+            text description to 3D model.
+          </p>
+          <ul class="feature-list">
+            <li>Direct execution in Rhino's Python environment</li>
+            <li>Leverages Grasshopper's parametric capabilities</li>
+            <li>Creates editable, optimized geometry</li>
+            <li>Supports all standard Rhino modeling operations</li>
+          </ul>
+        </div>
+        
+        <div id="revit-integration" class="feature-section">
+          <h2 class="feature-title">Revit Integration for BIM</h2>
+          <p class="feature-description">
+            Complete your workflow by converting Rhino models into Revit-compatible BIM files. MAIVI handles
+            the conversion process, ensuring your architectural designs can be seamlessly integrated into
+            your BIM workflow.
+          </p>
+          <ul class="feature-list">
+            <li>Automatic conversion to .bim file format</li>
+            <li>Preserves parametric relationships</li>
+            <li>Maintains material and layer information</li>
+            <li>Compatible with Revit's family system</li>
+          </ul>
         </div>
       </div>
-    </main>
-    <footer class="bg-gray-50">
-      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="md:flex md:items-center md:justify-between">
-          <div class="flex justify-center space-x-6 md:order-2">
-            <a href="https://github.com" class="text-gray-400 hover:text-gray-500" target="_blank" rel="noopener noreferrer">
-              <span class="sr-only">GitHub</span>
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-              </svg>
-            </a>
-          </div>
-          <div class="mt-8 md:mt-0 md:order-1">
-            <p class="text-center text-base text-gray-400">
-              &copy; 2025 MAIVI. All rights reserved.
-            </p>
-          </div>
-        </div>
+    </section>
+  </main>
+
+  <footer class="bg-black text-white py-8">
+    <div class="container mx-auto text-center">
+      <p>© 2025 MAIVI. All rights reserved.</p>
+      <div class="mt-4">
+        <a href="https://github.com" class="text-blue-500 hover:text-blue-400 mx-2">GitHub</a>
       </div>
-    </footer>
-  </div>
-  <script src="/js/main.js"></script>
+    </div>
+  </footer>
 </body>
 </html>
